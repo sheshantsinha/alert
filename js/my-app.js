@@ -10,7 +10,6 @@ var app = new Framework7({
     swipe: 'left',
   },
   // Add default routes
-  ],
   // ... other parameters
 });
 
