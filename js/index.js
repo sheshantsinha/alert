@@ -100,6 +100,7 @@ console.log(str6)
   '<div class="card-footer">'+str3+'</div>'+
 '</div>'
   $('#tab-3').prepend(str4)
+  count=2
 }
 
 function update_weight(ids) {

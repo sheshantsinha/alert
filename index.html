@@ -16,7 +16,7 @@
      <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
   </head>
-  <body>
+  <body onload="onLoad()">
     <!-- App root element -->
     <div id="app">
       <!-- Statusbar overlay -->
@@ -35,8 +35,8 @@
   <div class="toolbar tabbar">
     <div class="toolbar-inner">
       <!-- Links have "tab-link" class instead of just "link" to switch tabs -->
-      <a href="#tab-1" class="tab-link tab-link-active">Open</a>
-      <a href="#tab-2" class="tab-link">Closed</a>
+      <a href="#tab-1" class="tab-link tab-link-active" onclick="updateCount(0)">Open</a>
+      <a href="#tab-2" class="tab-link" onclick="updateCount(1)">Closed</a>
     </div>
   </div>
   <!-- Tabs -->
