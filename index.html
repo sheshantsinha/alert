@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+    <!-- Your app title -->
+    <title>My App</title>
+    <!-- Path to Framework7 Library CSS -->
+    <link rel="stylesheet" href="css/framework7.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/my-app.css">
+     <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+  </head>
+  <body>
+    <!-- App root element -->
+    <div id="app">
+      <!-- Statusbar overlay -->
+      <div class="statusbar"></div>
+
+      <!-- Your main view, should have "view-main" class -->
+      <div class="view view-main">
+        <!-- Initial Page, "data-name" contains page name -->
+       <div class="page">
+<div class="navbar">
+    <div class="navbar-inner">
+      <div class="title">Incident alert</div>
+    </div>
+  </div>
+  <!-- Additional "tabbar" class -->
+  <div class="toolbar tabbar">
+    <div class="toolbar-inner">
+      <!-- Links have "tab-link" class instead of just "link" to switch tabs -->
+      <a href="#tab-1" class="tab-link tab-link-active">Open</a>
+      <a href="#tab-2" class="tab-link">Closed</a>
+    </div>
+  </div>
+  <!-- Tabs -->
+  <div class="tabs">
+    <!-- First tab, active -->
+    <div class="page-content tab tab-active" id="tab-1">
+      <div class="block">
+        <div class="list media-list">
+  <ul class="open"></ul>
+</div>
+      </div>
+    </div>
+    <!-- Second tab -->
+    <div class="page-content tab" id="tab-2">
+      <div class="block">
+       <div class="list media-list">
+  <ul class="closed">
+        </ul>
+      </div>
+      </div>
+    </div>
+    <!-- Third tab -->
+    <div class="page-content tab" id="tab-3">
+      <div class="block">
+      Message will be shown here
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="js/socket.io.js"></script>
+    <script type="text/javascript" src="js/serverConnection.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!-- Path to your app js-->
+    <script type="text/javascript" src="js/my-app.js"></script>
+  </body>
+</html>
