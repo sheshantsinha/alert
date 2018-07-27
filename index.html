@@ -30,13 +30,14 @@
     <div class="navbar-inner">
       <div class="title">Incident alert</div>
     </div>
+    <a href="#tab-4" class="tab-link tab-link-active fourth_tab" style="display:none;"></a>
   </div>
   <!-- Additional "tabbar" class -->
   <div class="toolbar tabbar">
     <div class="toolbar-inner">
       <!-- Links have "tab-link" class instead of just "link" to switch tabs -->
-      <a href="#tab-1" class="tab-link tab-link-active" onclick="updateCount(0)">Open</a>
-      <a href="#tab-2" class="tab-link" onclick="updateCount(1)">Closed</a>
+      <a href="#tab-1" class="tab-link tab-link-active first_tab" onclick="updateCount(0)">Open</a>
+      <a href="#tab-2" class="tab-link first_tab second_tab" onclick="updateCount(1)">Closed</a>
     </div>
   </div>
   <!-- Tabs -->
@@ -53,7 +54,7 @@
     <div class="page-content tab" id="tab-2">
       <div class="block">
        <div class="list media-list">
-  <ul class="closed">
+        <ul class="closed">
         </ul>
       </div>
       </div>
@@ -64,6 +65,17 @@
       Message will be shown here
       </div>
     </div>
+
+    <div class="page-content tab" id="tab-4">
+      <div class="block">
+        <div class="card">
+        <div class="card-header"><b>Reminder of new Messages</b></div>
+        <div class="card-content card-content-padding">You have some unseen messages. Please see and response ASAP to the sender.</div>
+        <div class="card-footer"><a href="#tab-1" class="tab-link tab-link-active first_tab" onclick="updateCount(0)">Go to Open Notification tab</a></div>
+      </div>
+      </div>
+    </div>
+
   </div>
 </div>
       </div>

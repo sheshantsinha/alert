@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+    <!-- Your app title -->
+    <title>My App</title>
+    <!-- Path to Framework7 Library CSS -->
+    <link rel="stylesheet" href="css/framework7.min.css">
+    <!-- Path to your custom app styles-->
+<!--     <script type="text/javascript" src="js/cordova.js"></script> -->
+  </head>
+  <body onload="onLoad()">
+    <!-- App root element -->
+  <!-- Default view-page layout -->
+  <div class="view">
+    <div class="page">
+      <!-- page-content has additional login-screen content -->
+      <div class="page-content login-screen-content">
+        <div class="login-screen-title">Incident Alert</div>
+        <!-- Login form -->
+        <form>
+          <div class="list">
+            <ul>
+              <li class="item-content item-input mobile">
+                <div class="item-inner">
+                  <div class="item-title item-label">Mobile number</div>
+                  <div class="item-input-wrap">
+                    <input type="text" name="username" placeholder="Number" type="number" id="mobileNo">
+                    <span class="input-clear-button"></span>
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input otp" style="display: none;">
+                <div class="item-inner">
+                  <div class="item-title item-label">OTP</div>
+                  <div class="item-input-wrap">
+                    <input type="number" name="otp" placeholder="Enter 6 digit OTP" id="otp">
+                    <span class="input-clear-button"></span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="list">
+            <ul>
+              <li>
+                <a href="#" class="item-link list-button sign">Sign In/ Up</a>
+              </li>
+               <li>
+                <a href="#" class="item-link list-button verify" style="display: none;">Verify OTP</a>
+              </li>
+            </ul>
+            <div class="block-footer message">You will get notification about all the things happening in Walkover and it's product</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!-- Path to your app js-->
+    <script type="text/javascript" src="js/my-login-app.js"></script>
+     <script type="text/javascript" src="js/login.js"></script>
+  </body>
+</html>
