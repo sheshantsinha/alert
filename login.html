@@ -11,8 +11,10 @@
     <title>My App</title>
     <!-- Path to Framework7 Library CSS -->
     <link rel="stylesheet" href="css/framework7.min.css">
+    <link rel="stylesheet" href="css/my-app.css">
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
     <!-- Path to your custom app styles-->
-<!--     <script type="text/javascript" src="js/cordova.js"></script> -->
+    <script type="text/javascript" src="js/cordova.js"></script>
   </head>
   <body onload="onLoad()">
     <!-- App root element -->
@@ -44,6 +46,12 @@
                   </div>
                 </div>
               </li>
+
+              <li class="item-content item-input otp">
+                <div class="item-inner">
+                 <div id="recaptcha-container"></div>
+                </div>
+              </li>
             </ul>
           </div>
           <div class="list">
@@ -64,9 +72,9 @@
 
     <!-- Path to Framework7 Library JS-->
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <!-- Path to your app js-->
     <script type="text/javascript" src="js/my-login-app.js"></script>
-     <script type="text/javascript" src="js/login.js"></script>
   </body>
 </html>

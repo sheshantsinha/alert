@@ -1,5 +1,5 @@
 // Initialize Firebase
-var my_number=948,update=false,totalMessage=0
+var my_number=window.localStorage.getItem('mobile'),update=false,totalMessage=0,updateTimeArray=[[],[]],intervalVar
   var config = {
     apiKey: "AIzaSyAhX8ibtX5_NjoWGvrFj_IDBDvlfTdBdbI",
     authDomain: "kiss-16325.firebaseapp.com",
@@ -16,7 +16,7 @@ var my_number=948,update=false,totalMessage=0
     update_mobile_no()
 
     ref.on("value", function(snapshot){
-    
+    updateTimeArray=[[],[]]
     var ids=[]
     var data=JSON.stringify(snapshot.val(), null, 2);
     var obj=JSON.parse(data)
@@ -31,7 +31,7 @@ var my_number=948,update=false,totalMessage=0
   //try {
     var number =val['toMobile']
     if(number.toLowerCase()=='all') {
-        creatList(key,val)
+        createList(key,val)
     } else {
         number=number.split(",") 
         isPresent=false
@@ -56,6 +56,12 @@ var my_number=948,update=false,totalMessage=0
       //console.log(present)
     }
   }
+  try {
+    clearInterval(intervalVar)
+  } catch (error) {
+    console.log(error)
+  }
+  intervalVar=setInterval(iterateLoop,60000)
   if(!update) {
   update_weight(ids)
   console.log(1)
@@ -69,13 +75,14 @@ var my_number=948,update=false,totalMessage=0
 
 function createList(key,obj)
 {
-  var avilable=false
+  var available=false
   if($('#'+key))
     {
-    avilable=true
+    available=true
    // console.log(true)
     }
     var timeString=obj['Time']
+
     var tt=agoTime(timeString)
     str1='<li class="swipeout" id='+key+'>'+
       '<div class="swipeout-content">'+
@@ -96,6 +103,9 @@ function createList(key,obj)
         '<a href="#" class="color-green swipeout-overswipe alert-reply">Click to Snooze</a>'+
       '</div>'+
     '</li>'
+
+    updateTimeArray[0].push(key)
+    updateTimeArray[1].push(timeString)
     /*if(avilable) {
       $('#'+key+' .item-title').empty()
       $('#'+key+' .item-title').append(obj[key]['title'])
@@ -138,7 +148,7 @@ function createList(key,obj)
       }
     }
     }
-
+    console.log($('#'+key).attr('data'))
 }
 
 function openTab(id) {
@@ -221,7 +231,7 @@ if(i<3) {
   }
 }
 else if(i==3) {
-  if(k/60 <1) {
+  if(k/24 <1) {
     return Math.floor(k)+' '+time_array[i]
     break
   } else {
@@ -229,7 +239,7 @@ else if(i==3) {
   }
 }
 else if(i==4) {
-  if(k/60 <1) {
+  if(k/30 <1) {
     return Math.Floor(k)+' '+time_array[i]
     break
   } else {
@@ -237,7 +247,7 @@ else if(i==4) {
   }
 }
 else if(i==5) {
-  if(k/60 <1) {
+  if(k/12 <1) {
     return Math.Floor(k)+' '+time_array[i]
     break
   } else {
@@ -290,7 +300,6 @@ else {
   //alert('K '+k)
 }
 if(criticalTime != NaN & currentTime<=(msgTime+criticalTime)) {
-  // alert('Working2')
   setCriticalNotification(msgTime+criticalTime,obj['title'],obj['Sender'],key)
 }
 }
@@ -322,14 +331,14 @@ a1=new Date(time).getHours()
 b=new Date(time).getMinutes()
 c=new Date(time).getSeconds()
 
-var alarmId=0,alarmString={}
+var alarmId=10000,alarmString={}
   if(!window.localStorage.getItem('alarmId')) {
-    alarmId=1
+    alarmId=10001
   }
   else {
     alarmId=parseInt(window.localStorage.getItem('alarmId'))
     alarmString=JSON.parse(window.localStorage.getItem('alarmString'))
-    notificationId++
+    alarmId++
   }
   /*console.log(notification)
   console.log(notificationId)*/
@@ -353,6 +362,7 @@ try {
        }] 
    }
 );
+  Alarmschedule(alarmId,title,sender,time)
   } catch(error) {
     alert(error)
   }
@@ -360,24 +370,27 @@ try {
 
 var successCallback = function(result) {
     //alarmString=JSON.parse(window.localStorage.getItem('alarmString'))
-    $(".fourth_tab")[0].click()
-    clicked=4
-    alert('Alarmschedule')
-    Alarmschedule()
+     if (result.type==='wakeup') {
+           $(".fourth_tab")[0].click()
+           clicked=4
+           dateTime=new Date().getHours()+" : "+new Date().getMinutes()
+           notificationClickToClose.open();
+    } 
+    //Alarmschedule()
   };
 
   var errorCallback = function(result) {
     alert(result)
   };  
 
-function Alarmschedule(id,title,message) {
+function Alarmschedule(id,title,sender,time) {
     var sound='file://pingpong.mp3'
     try {
-        var time=new Date()
+        var time=new Date(time)
        cordova.plugins.notification.local.schedule({
         id: id,
-        title: "Urgent message",
-        text: "Have a look.",
+        title: "Alarm",
+        text: sender+"- "+title,
         at: time,
         sound:sound,
         vibrate:true
@@ -390,7 +403,7 @@ function Alarmschedule(id,title,message) {
 
 
 function snoozeAlarm(key) {
-  var ss=prompt("Enter time in seconds.")
+ /* var ss=prompt("Enter time in seconds.")
   if(parseInt(ss)==NaN) {
     ss=60
   } else {
@@ -399,9 +412,9 @@ function snoozeAlarm(key) {
   var sec=((new Date().getTime()/1000)+ss)*1000
   h1=new Date(sec).getHours()
   m1=new Date(sec).getMinutes()
-  s1=new Date(sec).getSeconds()
+  s1=new Date(sec).getSeconds()*/
  try {
-  window.wakeuptimer.wakeup( successCallback1,
+/*  window.wakeuptimer.wakeup( successCallback1,
     errorCallback1,
     {
         alarms : [{
@@ -412,13 +425,14 @@ function snoozeAlarm(key) {
            // action : this.get('action')
         }]
     }
- );
+ );*/
+   dateTime=new Date().getHours()+" : "+new Date().getMinutes()
    notificationClickToClose.open();
   } catch(error) {
     alert(error)
   }
 }
-
+/*
 var successCallback1 = function(result) {
     //alarmString=JSON.parse(window.localStorage.getItem('alarmString'))
     clicked=4
@@ -428,10 +442,10 @@ var successCallback1 = function(result) {
 
   var errorCallback1 = function(result) {
     alert('Error ',result)
-  };  
+  };  */
 
 
-  function snoozeSchedule() {
+/*  function snoozeSchedule() {
 
     var sound='file://pingpong.mp3'
     try {
@@ -447,4 +461,13 @@ var successCallback1 = function(result) {
     } catch (error) {
       alert(error)
     } 
+  }*/
+
+  function iterateLoop() {
+    uta=updateTimeArray
+    for(var i=0;i<uta[0].length;i++) {
+      var tt=agoTime(uta[1][i])
+      $("#"+uta[0][i]+' .item-after').empty()
+      $("#"+uta[0][i]+' .item-after').text(tt+' ago')
+    }
   }

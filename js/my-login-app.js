@@ -29,9 +29,15 @@ var notificationFull = app.notification.create({
 var mainView = app.views.create('.view-main');
 
 
-var clicked=0
   function onLoad() {
-        document.addEventListener("deviceready", onDeviceReady, false);
+        var number=window.localStorage.getItem('mobile')
+        var login=window.localStorage.getItem('login')
+        console.log(number)
+        if(number != null) {
+          window.location.href='index.html'
+        } else {
+           document.addEventListener("deviceready", onDeviceReady, false);
+        }
     }
 
     // device APIs are available
@@ -43,15 +49,3 @@ var clicked=0
 
     // Handle the back button
     //
-    function onBackKeyDown() {
-      if(clicked != 0) {
-        app.addView('#tab-1')
-        clicked=0
-      } else {
-        window.plugins.appMinimize.minimize();
-      }
-    }
-
-  function updateCount(val) {
-    clicked=val
-  }
