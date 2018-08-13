@@ -15,9 +15,11 @@ var app = new Framework7({
 
 var mainView = app.views.create('.view-main');
 var dateTime=new Date().getHours()+" : "+new Date().getMinutes()
+
+
 var notificationClickToClose = app.notification.create({
   title: 'Incident Alert',
-  titleRightText: dateTime,
+  titleRightText: new Date().getHours()+" : "+new Date().getMinutes(),
   //subtitle: 'Reminder',
   text: 'Temprorarly this function is not enabled. Inconvience is regretted.',
   closeOnClick: true,
@@ -33,6 +35,7 @@ var clicked=0
         document.addEventListener("deviceready", onDeviceReady, false);
         timeoutSetting()
         }
+      //  alert(window.localStorage.getItem('mobile'))
     }
 
     // device APIs are available
@@ -58,7 +61,7 @@ var clicked=0
     });
 
         window.FirebasePlugin.onNotificationOpen(function(notification) {
-          alert(JSON.strngify(notification))
+          console.log(JSON.strngify(notification))
          // openTab('"'+notification.click_action+'"')
         //alert('Notification '+notification);
     }, function(error) {
@@ -83,7 +86,7 @@ var clicked=0
             else
             {
               alert('Denied')
-              navigator.notification.alert("Reminder cannot be added because app doesn't have permission");
+              navigator.notification.alert("Permission denied for local notifiation. Please allow it then restart the app");
             }
         });
       }

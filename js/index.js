@@ -30,9 +30,9 @@ var my_number=window.localStorage.getItem('mobile'),update=false,totalMessage=0,
 
   //try {
     var number =val['toMobile']
-    if(number.toLowerCase()=='all') {
+   /* if(number.toLowerCase()=='all') {
         createList(key,val)
-    } else {
+    } else {*/
         number=number.split(",") 
         isPresent=false
         for(var i=0;i<number.length;i++) {
@@ -45,7 +45,7 @@ var my_number=window.localStorage.getItem('mobile'),update=false,totalMessage=0,
         createList(key,val)
         }
       
-    }
+    //}
    // } catch (error) {
    //   console.log(error)
    // }
@@ -350,7 +350,7 @@ var alarmId=10000,alarmString={}
   }
 
 try {
-  window.wakeuptimer.wakeup( successCallback,  
+/*  window.wakeuptimer.wakeup( successCallback,  
    errorCallback, 
    // a list of alarms to set
    {
@@ -361,7 +361,7 @@ try {
             message :b
        }] 
    }
-);
+);*/
   Alarmschedule(alarmId,title,sender,time)
   } catch(error) {
     alert(error)

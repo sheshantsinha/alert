@@ -15,42 +15,15 @@ $(document).ready(function(){
   $(".sign").click(function(){
   	console.log('called')
   	var MobileNo=$("#mobileNo").val()
+    var countryCode=$('#sel option:selected').val().toString();
+    MobileNo=countryCode+MobileNo
+    console.log(MobileNo)
   	if($.trim(MobileNo).length>0) {
-      $.ajax({
-        type:'POST',
-        url:'https://sokt.io/VPNWxQMz72kcjYWR9zuy/incident_alert-send_otp',
-        crossorigin:true,
-        data:{mobile:MobileNo},
-        beforeSend:function() {
-          appendMsg('Checking mobile no....Please Wait')
-          $("#mobileNo").attr('disabled','disabled')
-          $(".sign").attr('disabled','disabled')
-        },
-        success:function(data){
-          $("#sign").removeAttr('disabled')
-          if(data.success) {
-            console.log(data.success)
-             $(".mobile").hide()
-            $(".otp").show()
-            $(".mobile").val("")
-            $(".sign").hide()
-            $(".verify").show()
-            mobile_no=MobileNo
-            appendMsg('<center><b>OTP has been sent to your mobile number</b></center>')
-            goBack=1
-          }
-          else {
-            appendMsg('Unable to reach please try again')
-
-          }
-        }
-
-      })
+     sendOtp(MobileNo,0)
   	}
   })
 
     $(".verify").click(function() {
-    	console.log('called 2nd time')
     	var otp=$("#otp").val()
     	if($.trim(otp).length==6) {
         $.ajax({
@@ -69,15 +42,30 @@ $(document).ready(function(){
             window.location.href='index.html'
             window.FirebasePlugin.register();
           }
-          else {
+          } else {
             appendMsg('<b>Incorrect OTP.Please try again<b>')
-          }
+            $("#otp").val("")
           }
           console.log(data)
         }
       })
       };
   })
+    $('.resend').click(function(){
+      sendOtp(mobile_no,0)
+      appendMsg('Re-sending OTP')
+    })
+
+    $('.revoice').click(function(){
+      sendOtp(mobile_no,1)
+      appendMsg('Generating voice call')
+    })
+
+    $('.backToFront').click(function(){
+      onBackKeyDown()
+
+    })
+
 })
 function appendMsg(text) {
 	$(".message").empty()
@@ -87,13 +75,62 @@ function appendMsg(text) {
 function onBackKeyDown() {
 if(goBack==1) {
 	$(".mobile").show()
+  $(".ccode").show()
 	$(".otp").hide()
 	$(".mobile").val("")
 	$(".sign").show()
 	$(".verify").hide()
-	appendMsg('You will get notification about all the things happening in Walkover and it\'s product')
+  $(".resend").hide()
+  $(".backToFront").hide()
+  $('.revoice').hide()
+	appendMsg('')
+  goBack=0
 } else {
         window.plugins.appMinimize.minimize();
 }
 }
  
+function sendOtp(MobileNo,type) {
+  if(type==0) {
+    url='https://sokt.io/VPNWxQMz72kcjYWR9zuy/incident_alert-send_otp'
+  } else {
+    url='https://sokt.io/43x4fngNuFwvEoAt7Cfu/incident_alert-send_voice_otp'
+  }
+
+        $.ajax({
+        type:'POST',
+        url:url,
+        crossorigin:true,
+        data:{mobile:MobileNo},
+        beforeSend:function() {
+          appendMsg('Sending OTP....Please Wait')
+          $("#mobileNo").attr('disabled','disabled')
+          $(".sign").attr('disabled','disabled')
+        },
+        success:function(data){
+          $(".sign").removeAttr('disabled')
+          $("#mobileNo").removeAttr('disabled','disabled')
+          if(data.success) {
+            console.log(data.success)
+            mobile_no=MobileNo
+            $(".mobile").hide()
+            $(".ccode").hide()
+            $(".otp").show()
+            $(".mobile").val("")
+            $(".sign").hide()
+            $(".verify").show()
+            $(".resend").show()
+            $(".backToFront").show()
+            $('.revoice').show()
+            appendMsg('<center><b>OTP has been sent to your mobile number.</b></center>')
+            console.log(mobile_no)
+            goBack=1
+          }
+          else {
+            appendMsg('Unable to reach please try again')
+
+          }
+        }
+
+      })
+}
