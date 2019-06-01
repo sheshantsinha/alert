@@ -2,11 +2,11 @@ var app=require('express')()
 var http=require('http').Server(app)
 var admin = require("firebase-admin");
 
-var serviceAccount = require("./kiss-16325-firebase-adminsdk-4ppmp-6ad3aafa4d.json");
+var serviceAccount = require("./google_firebase_json_file.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://kiss-16325.firebaseio.com"
+  databaseURL: "https://database_url.com"
 });
 
 app.get('/',function(req,res){
