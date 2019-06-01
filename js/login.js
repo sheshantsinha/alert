@@ -3,11 +3,11 @@ var goBack=0,mobile_no=0
 
 var config = {
   apiKey: "AIzaSyAhX8ibtX5_NjoWGvrFj_IDBDvlfTdBdbI",
-  authDomain: "kiss-16325.firebaseapp.com",
-  databaseURL: "https://kiss-16325.firebaseio.com",
-  projectId: "kiss-16325",
-  storageBucket: "kiss-16325.appspot.com",
-  messagingSenderId: "118321990441"
+  authDomain: "database_domain_url.com",
+  databaseURL: "https://database_url.firebaseio.com",
+  projectId: "16325",
+  storageBucket: "xyz-16325.appspot.com",
+  messagingSenderId: "1234567890"
 };
 firebase.initializeApp(config);
 
